@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "devDependencies": {
     "ora": "^4.0.3",
     "shelljs": "^0.8.3"
