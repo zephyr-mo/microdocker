@@ -1,0 +1,10 @@
+{
+  "name": "monitor",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "ora": "^4.0.3",
+    "shelljs": "^0.8.3"
+  }
+}
