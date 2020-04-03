@@ -1,4 +1,4 @@
-const { exec, cd } = require('shelljs');
+const { exec, cd, ls } = require('shelljs');
 const ora          = require('ora');
 const fileExist    = require('./lib/fileExist');
 const pull         = require('./lib/pull');
@@ -30,19 +30,22 @@ const start      = async () => {
             spinner.text = `打开浏览器`;
             spinner.stop();
             exec('open http://localhost:3000');
-            exec('node koaTest.js', { async: false });
+            exec('node koaTest.js');
         })
     } else {
         try {
             cd('..');
+            spinner.start();
 
-            // spinner.text = `拉取代码 --> ${remoteUrl}`;
+            spinner.text = `拉取代码 --> ${remoteUrl}`;
             await clone(remoteUrl);
 
-            // spinner.text = `安装依赖中`;
-            const result = await install();
-            console.log({ result });
             cd(`./${dockerName}`);
+            spinner.text = `安装依赖中`;
+            await install();
+            spinner.stop();
+
+            exec('open http://localhost:3000');
             exec('node koaTest.js');
         } catch (err) {
             console.log('看看error是什么', err.message);
